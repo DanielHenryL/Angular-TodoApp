@@ -1,4 +1,5 @@
 export interface Todo{
   description:string,
-  status:boolean
+  status?:boolean,
+  _id?:string
 }

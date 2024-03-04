@@ -1,4 +1,12 @@
-<input type="text" required placeholder="Description">
-<button type="submit">
-  Agregar
-</button>
+<form [formGroup]="myForm" (ngSubmit)="onInput()">
+  <input
+    type="text"
+    required
+    placeholder="Description"
+    formControlName="description"
+  >
+  <button >
+    Agregar
+  </button>
+
+</form>

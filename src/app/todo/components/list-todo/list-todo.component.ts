@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Todo } from '../../interfaces/todo.interfaces';
 
 @Component({
@@ -9,9 +9,12 @@ import { Todo } from '../../interfaces/todo.interfaces';
 export class ListTodoComponent {
 
   @Input()
-  public todos:Todo[] = [
-    {description:'hola',
-  status:false}
-  ];
+  public todos:Todo[] = [];
 
+  @Output()
+  public deleteById:EventEmitter<string> = new EventEmitter();
+
+  onDelete( id?:string ){
+    this.deleteById.emit( id );
+  }
 }

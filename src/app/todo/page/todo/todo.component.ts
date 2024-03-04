@@ -9,10 +9,25 @@ import { Todo } from '../../interfaces/todo.interfaces';
 })
 export class TodoComponent {
 
-  public todos:Todo[] =[]
+  public todos:Todo[] =[];
 
   constructor( private todoService:TodoService){
     this.getTodo();
+  }
+
+  onInput( value:string ){
+
+    const todo:Todo = {
+      description:value,
+      status:false
+    }
+
+    this.todoService.createTodo(todo)
+      .subscribe({
+        next: (value) => {
+          this.todos.push(value)
+        },
+      })
   }
 
   getTodo(){
@@ -20,10 +35,16 @@ export class TodoComponent {
     .subscribe({
       next: (value) => {
         this.todos = value
-      },
-      error:(err)=> {
-         console.log( err );
-      },
+      }
     })
+  }
+
+  onDelete( id:string ){
+    this.todoService.deleteTodo( id )
+      .subscribe({
+        next:(value) => {
+          this.todos = this.todos.filter( (todo) =>todo._id !== value._id )
+         },
+      })
   }
 }
