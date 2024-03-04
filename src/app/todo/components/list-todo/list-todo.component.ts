@@ -14,7 +14,14 @@ export class ListTodoComponent {
   @Output()
   public deleteById:EventEmitter<string> = new EventEmitter();
 
+  @Output()
+  public todoById:EventEmitter<string> = new EventEmitter();
+
   onDelete( id?:string ){
     this.deleteById.emit( id );
+  }
+
+  onTodoById( id?:string ){
+    this.todoById.emit( id );
   }
 }

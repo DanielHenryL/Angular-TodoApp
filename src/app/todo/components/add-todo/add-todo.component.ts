@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Todo } from '../../interfaces/todo.interfaces';
 
 @Component({
   selector: 'add-todo',
@@ -9,18 +10,29 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class AddTodoComponent {
 
   public myForm:FormGroup = new FormGroup({
-    description: new FormControl('',[Validators.required, Validators.minLength(1)])
+    description: new FormControl('',[Validators.required, Validators.minLength(1)]),
   })
 
   @Output()
-  public todoInput:EventEmitter<string> = new EventEmitter();
+  public onNewTodo:EventEmitter<Todo> = new EventEmitter();
 
-  onInput(  ):void{
+  @Output()
+  public onUpdateTodo:EventEmitter<Todo> = new EventEmitter();
+
+
+  @Input()
+  public todo:Todo = {
+    description:''
+  }
+
+  emitTodo( id? :string):void{
     if( this.myForm.invalid ) return;
-
-    if( this.myForm.controls['description'].value.length < 1 ) return;
-
-    this.todoInput.emit( this.myForm.get('description')!.value );
+    if ( id ) {
+      const todo = { ...this.myForm.value, _id:id}
+      this.onUpdateTodo.emit( todo );
+    }else{
+      this.onNewTodo.emit( this.myForm.value );
+    }
 
     this.myForm.setValue({description:''})
   }

@@ -3,6 +3,6 @@
   <li *ngFor="let todo of todos">
     {{ todo.description }}
     <button (click)="onDelete(todo._id)">Eliminar</button>
-    <button>Actualizar</button>
+    <button (click)="onTodoById(todo._id)">Actualizar</button>
   </li>
 </ul>

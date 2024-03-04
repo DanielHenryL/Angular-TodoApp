@@ -1,6 +1,6 @@
 <div>
-  <add-todo (todoInput)="onInput($event)"></add-todo>
+  <add-todo (onNewTodo)="onCreateOrUpdateTodo($event)" [todo]="todo" (onUpdateTodo)="onCreateOrUpdateTodo($event)"></add-todo>
 </div>
 <div>
- <list-todo [todos]="todos" (deleteById)="onDelete($event)"></list-todo>
+ <list-todo [todos]="todos" (deleteById)="onDelete($event)" (todoById)="onTodoById($event)"></list-todo>
 </div>

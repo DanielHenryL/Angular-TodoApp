@@ -24,4 +24,10 @@ export class TodoService {
     return this.httpClient.delete<Todo>(`${ this.baseUrl }/${ id }`)
   }
 
+  getTodo( id:string ):Observable<Todo>{
+    return this.httpClient.get<Todo>(`${this.baseUrl}/${ id }`)
+  }
+  updateTodo( id:string, todo:Todo ):Observable<Todo>{
+    return this.httpClient.patch<Todo>(`${ this.baseUrl }/${ id }`, todo )
+  }
 }

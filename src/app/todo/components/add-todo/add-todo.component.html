@@ -1,11 +1,12 @@
-<form [formGroup]="myForm" (ngSubmit)="onInput()">
+<form [formGroup]="myForm" (ngSubmit)="emitTodo(todo._id)">
   <input
     type="text"
     required
     placeholder="Description"
     formControlName="description"
+    [value]="todo.description"
   >
-  <button >
+  <button>
     Agregar
   </button>
 

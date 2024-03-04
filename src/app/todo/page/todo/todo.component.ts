@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { TodoService } from '../../service/todo.service';
 import { Todo } from '../../interfaces/todo.interfaces';
 
@@ -10,32 +10,55 @@ import { Todo } from '../../interfaces/todo.interfaces';
 export class TodoComponent {
 
   public todos:Todo[] =[];
+  public todo:Todo = {
+    description:''
+  }
 
   constructor( private todoService:TodoService){
-    this.getTodo();
+    this.getTodos();
   }
 
-  onInput( value:string ){
+  onCreateOrUpdateTodo( todo:Todo ){
+    if(todo._id){
+      const {_id , ...resto} = todo;
+      this.todoService.updateTodo( _id , resto)
+        .subscribe({
+          next:(value) => {
+            this.todos.map((todo)=>{
+              if(todo._id === value._id){
+                return value;
+              }
+              return todo;
+            })
+            this.getTodos();
+          },
+        })
 
-    const todo:Todo = {
-      description:value,
-      status:false
-    }
-
-    this.todoService.createTodo(todo)
-      .subscribe({
-        next: (value) => {
-          this.todos.push(value)
-        },
+    }else{
+      this.todoService.createTodo(todo)
+        .subscribe({
+          next: (value) => {
+            this.todos.push(value)
+          },
       })
+    }
   }
 
-  getTodo(){
+  getTodos(){
     this.todoService.getTodos()
     .subscribe({
       next: (value) => {
         this.todos = value
       }
+    })
+  }
+
+  onTodoById( id:string ){
+    this.todoService.getTodo( id )
+    .subscribe({
+      next: (value) => {
+        this.todo = value
+      },
     })
   }
 
