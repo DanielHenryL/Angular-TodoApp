@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+/* configuracion inicial de un proyecto css */
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  font-size: 1.6rem;
+  line-height: 1.8;
+}
