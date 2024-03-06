@@ -7,6 +7,12 @@
   flex-direction: column;
   row-gap: 1rem;
 }
+.formulario__parrafo{
+  margin: .5rem 0;
+}
+.formulario__confirmacion{
+  display: flex;
+}
 .formulario__input{
   border: .2rem solid rgba(158, 158, 241);
   box-shadow: 0px 0px 1.5rem .3rem rgba(158, 158, 241, 0.2);

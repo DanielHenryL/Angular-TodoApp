@@ -1,16 +1,18 @@
-
 <div class="formulario">
-  <form class="formulario__contenedor" [formGroup]="myForm" (ngSubmit)="emitTodo(todo._id)">
+  <form class="formulario__contenedor" [formGroup]="myForm" (ngSubmit)="emitTodo()">
     <input
       class="formulario__input"
       type="text"
       required
       placeholder="Description"
       formControlName="description"
-      [value]="todo.description"
     >
+    <div class="formulario__confirmacion">
+      <input class="formulario__checkbox" type="checkbox" formControlName="status">
+      <p class="formulario__parrafo">Hecho</p>
+    </div>
     <button class="formulario__button btn">
-      {{ todo._id ? 'Actualizar':'Agregar'}}
+      {{ todo?._id ? 'Actualizar':'Agregar'}}
     </button>
 
   </form>

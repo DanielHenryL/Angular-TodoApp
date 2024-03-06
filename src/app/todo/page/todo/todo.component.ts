@@ -7,12 +7,10 @@ import { Todo } from '../../interfaces/todo.interfaces';
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css'
 })
-export class TodoComponent {
+export class TodoComponent   {
 
   public todos:Todo[] =[];
-  public todo:Todo = {
-    description:''
-  }
+  public todo?:Todo;
 
   constructor( private todoService:TodoService){
     this.getTodos();

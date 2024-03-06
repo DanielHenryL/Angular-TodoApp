@@ -1,8 +1,10 @@
 
-<ul>
-  <li *ngFor="let todo of todos">
-    {{ todo.description }}
-    <button (click)="onDelete(todo._id)">Eliminar</button>
-    <button (click)="onTodoById(todo._id)">Actualizar</button>
+<ul class="lista">
+  <li class="lista__todo" *ngFor="let todo of todos">
+    <p class="lista__descripcion" [ngClass]="{ 'lista_tachada': todo.status }">{{ todo.description }}</p>
+    <div class="lista__buttons">
+      <button class="lista__button lista__button--eliminar" (click)="onDelete(todo._id)">Eliminar</button>
+      <button class="lista__button lista__button--actualizar" (click)="onTodoById(todo._id)">Actualizar</button>
+    </div>
   </li>
 </ul>

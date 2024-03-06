@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Todo } from '../../interfaces/todo.interfaces';
 
@@ -7,10 +7,11 @@ import { Todo } from '../../interfaces/todo.interfaces';
   templateUrl: './add-todo.component.html',
   styleUrl: './add-todo.component.css'
 })
-export class AddTodoComponent {
+export class AddTodoComponent implements OnChanges{
 
   public myForm:FormGroup = new FormGroup({
     description: new FormControl('',[Validators.required, Validators.minLength(1)]),
+    status:new FormControl( false ),
   })
 
   @Output()
@@ -19,22 +20,23 @@ export class AddTodoComponent {
   @Output()
   public onUpdateTodo:EventEmitter<Todo> = new EventEmitter();
 
-
   @Input()
-  public todo:Todo = {
-    description:''
+  public todo?:Todo;
+
+  ngOnChanges(): void {
+    this.myForm.patchValue({ ...this.todo })
   }
 
-  emitTodo( id? :string):void{
+  emitTodo():void{
     if( this.myForm.invalid ) return;
-    if ( id ) {
-      const todo = { ...this.myForm.value, _id:id}
-      this.onUpdateTodo.emit( todo );
+    if( this.todo ){
+      const todoUpdate = { ...this.myForm.value, _id:this.todo._id}
+      this.onUpdateTodo.emit( todoUpdate )
     }else{
-      this.onNewTodo.emit( this.myForm.value );
+      this.onNewTodo.emit( this.myForm.value )
     }
-
-    this.myForm.setValue({description:''})
+    this.myForm.reset();
+    this.todo = undefined;
   }
 
 }

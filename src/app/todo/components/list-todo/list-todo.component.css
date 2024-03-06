@@ -1,0 +1,60 @@
+.lista{
+  padding: 1rem;
+}
+.lista__todo{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-bottom: .1rem solid;
+}
+.lista__todo:last-of-type{
+  border-bottom: none;
+}
+/* .lista__todo:first-of-type{
+  border-top: .1rem solid;
+} */
+.lista__descripcion{
+  width: 100%;
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.lista__buttons{
+  display: flex;
+  justify-items: center;
+  gap: 1rem;
+}
+.lista__button{
+  border-radius: .5rem; /*5px*/
+  padding: 1rem;
+  height: 5rem;
+}
+.lista__button--actualizar{
+  background: linear-gradient(to left, rgb(202, 238, 223), rgb(172, 236, 183));
+  box-shadow: 0px 0px 1.5rem .3rem rgba(172, 236, 183, 0.4);
+}
+.lista__button--actualizar:hover{
+  background: linear-gradient(to right, rgb(202, 238, 223), rgb(98, 224, 119));
+}
+.lista__button--eliminar{
+  background: linear-gradient(to left, rgb(230, 182, 185), rgb(241, 68, 68));
+  box-shadow: 0px 0px 1.5rem .3rem rgba(241, 68, 68, 0.4);
+}
+.lista__button--eliminar:hover{
+  background: linear-gradient(to right, rgb(230, 182, 185), rgb(241, 68, 68));
+}
+.lista__button:hover{
+  cursor: pointer;
+}
+.lista_tachada{
+  text-decoration: line-through;
+}
+@media (max-width: 400px) {
+  .lista__buttons{
+    flex-direction: column;
+  }
+  .lista__descripcion{
+    align-self: center;
+  }
+}
